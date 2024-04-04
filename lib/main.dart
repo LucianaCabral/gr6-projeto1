@@ -1,22 +1,19 @@
-// ignore: unused_import
-import 'dart:ffi';
 import 'dart:math';
 
-import 'package:desenvolvegr6/exercises/exercise_11.dart';
-import 'package:desenvolvegr6/exercises/exercise_17.dart';
-import 'package:desenvolvegr6/exercises/exercise_2.dart';
-import 'package:desenvolvegr6/exercises/exercise_8.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+import 'exercises/exercise_10.dart';
+import 'exercises/exercise_11.dart';
 import 'exercises/exercise_13.dart';
 import 'exercises/exercise_14.dart';
-import 'exercises/exercise_10.dart';
+import 'exercises/exercise_17.dart';
 import 'exercises/exercise_18.dart';
+import 'exercises/exercise_2.dart';
 import 'exercises/exercise_3.dart';
 import 'exercises/exercise_4.dart';
 import 'exercises/exercise_5.dart';
 import 'exercises/exercise_6.dart';
+import 'exercises/exercise_8.dart';
 import 'exercises/exercise_9.dart';
 
 void main() {
@@ -26,32 +23,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Desenvolve 6',
       theme: ThemeData(
-// This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
+        colorScheme:
+        ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
-        fontFamily: GoogleFonts.poppins().fontFamily,
       ),
-      home: const MyHomePage(title: 'Desenvolve 6'),
+      home: const MyHomePage(title: 'Desenvove 6'),
     );
   }
 }
@@ -66,21 +48,49 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _result = 'Result';
-  String _textChallenge = '';
-  int _counter = 0;
+  late String _result = '';
+  String? _textChallenge;
   Random random = Random();
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-      _result = _counter.toString();
-    });
+  final List<DropdownMenuItem<String>> _challengesList =
+  List.generate(19, (index) {
+    final challengeNumber = index + 1;
+    return DropdownMenuItem<String>(
+      value: 'challenge$challengeNumber',
+      child: Text('challenge $challengeNumber'),
+    );
+  });
+
+  void callChallenge() {
+    Map<String, Function> challengeFunctions = {
+      'challenge1': () => _challenge1(),
+      'challenge2': () => _challenge2(),
+      'challenge3': () => _challenge3(),
+      'challenge4': () => _challenge4(),
+      'challenge5': () => _challenge5(),
+      'challenge6': () => _challenge6(),
+      'challenge7': () => _challenge7(),
+      'challenge8': () => _challenge8(),
+      'challenge9': () => _challenge9(),
+      'challenge10': () => _challenge10(),
+      'challenge11': () => _challenge11(),
+      'challenge12': () => _challenge12(),
+      'challenge13': () => _challenge13(),
+      'challenge14': () => _challenge14(),
+      'challenge15': () => _challenge15(),
+      'challenge16': () => _challenge16('arara'),
+      'challenge17': () => _challenge17(),
+      'challenge18': () => _challenge18(),
+      'challenge19': () => _challenge19(),
+    };
+
+    if (challengeFunctions.containsKey(_textChallenge)) {
+      challengeFunctions[_textChallenge]!();
+    }
   }
 
   void _challenge1() {
     setState(() {
-      _textChallenge = "Challenge 1";
       int num1 = random.nextInt(10);
       int num2 = random.nextInt(10);
       if (num1 == num2) {
@@ -98,7 +108,6 @@ class _MyHomePageState extends State<MyHomePage> {
     int c = random.nextInt(10);
     setState(() {
       String result = checkSum(a, b, c);
-      _textChallenge = 'Challenge 2';
       _result = result;
     });
   }
@@ -107,7 +116,6 @@ class _MyHomePageState extends State<MyHomePage> {
     int number = random.nextInt(10);
     setState(() {
       String result = calculateFactorial(number);
-      _textChallenge = 'Challenge 3';
       _result = result.toString();
     });
   }
@@ -117,7 +125,6 @@ class _MyHomePageState extends State<MyHomePage> {
     int maxNumber = 100;
     setState(() {
       String result = checknumber(minNumber, maxNumber);
-      _textChallenge = 'Challenge 4';
       _result = result.toString();
     });
   }
@@ -129,7 +136,6 @@ class _MyHomePageState extends State<MyHomePage> {
     int randomNumberB = random.nextInt(numberB);
     setState(() {
       String result = checkTwoNumbers(randomNumberA, randomNumberB);
-      _textChallenge = 'Challenge 5';
       _result = result.toString();
     });
   }
@@ -138,7 +144,6 @@ class _MyHomePageState extends State<MyHomePage> {
     int value = 100;
     setState(() {
       String result = checkpreviousnext(value);
-      _textChallenge = 'Challenge 6';
       _result = result.toString();
     });
   }
@@ -152,7 +157,6 @@ class _MyHomePageState extends State<MyHomePage> {
         'The user earns ${salariosMinimos.toStringAsFixed(2)} minimum wages.';
 
     setState(() {
-      _textChallenge = 'Challenge 7';
       _result = result;
     });
   }
@@ -164,7 +168,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       String result = descendingOrder(value1, value2, value3);
-      _textChallenge = 'Challenge 8';
       _result = result;
     });
   }
@@ -172,12 +175,11 @@ class _MyHomePageState extends State<MyHomePage> {
   void _challenge9() {
     setState(() {
       List<dynamic> result =
-          challenge9(); // Chamando a função e recebendo a média e o status
+      challenge9(); // Chamando a função e recebendo a média e o status
       double media = result[0]; // Obtendo a média da lista retornada
       String status = result[1]; // Obtendo o status da lista retornada
-      _textChallenge = 'Challenge 9';
       _result =
-          'Média: $media\nStatus: $status'; // Atualizando o valor de _result
+      'Média: $media\nStatus: $status'; // Atualizando o valor de _result
     });
   }
 
@@ -187,7 +189,6 @@ class _MyHomePageState extends State<MyHomePage> {
       String nome = result[0];
       int idade = result[1];
       String mensagem = result[2];
-      _textChallenge = 'Challenge 10';
       _result = '$nome - $mensagem';
     });
   }
@@ -196,7 +197,6 @@ class _MyHomePageState extends State<MyHomePage> {
     int numero = random.nextInt(10);
     setState(() {
       String result = showMultiplicationTable(numero);
-      _textChallenge = 'Challenge 11';
       _result = result.toString();
     });
   }
@@ -211,7 +211,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     setState(() {
-      _textChallenge = 'Challenge 12';
       _result = squares.toString();
     });
   }
@@ -219,7 +218,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void _challenge13() {
     List<int> numbers = List.generate(10, (_) => Random().nextInt(100));
     setState(() {
-      _textChallenge = 'Challenge 13';
       _result = countEvenAndOddNumbers(numbers);
     });
   }
@@ -228,7 +226,6 @@ class _MyHomePageState extends State<MyHomePage> {
     List<int> randomNumbers = generateRandomNumbers(10);
     setState(() {
       String result = findMinMax(randomNumbers);
-      _textChallenge = 'Challenge 14';
       _result = result.toString();
     });
   }
@@ -241,7 +238,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     setState(() {
       _result =
-          "The generated limit is ${limit.toString()} and the list is: ${numbers.toString()}";
+      "The generated limit is ${limit.toString()} and the list is: ${numbers.toString()}";
     });
   }
 
@@ -255,7 +252,6 @@ class _MyHomePageState extends State<MyHomePage> {
     List<String> palavraAoContrario = palavraArray.reversed.toList();
 
     setState(() {
-      _textChallenge = "Challenge 16";
       if (palavraAoContrario.join('') == palavraArray.join('')) {
         _result = "A palavra ou frase $palavra é Palíndromo";
       } else {
@@ -272,20 +268,18 @@ class _MyHomePageState extends State<MyHomePage> {
       } else {
         _result = '$value is not a prime!';
       }
-      _textChallenge = 'Challenge 17';
     });
   }
 
   void _challenge18() {
     setState(() {
       List<dynamic> result =
-          challenge18(); // Chamando a função e recebendo a palavra, frase e resultado
+      challenge18(); // Chamando a função e recebendo a palavra, frase e resultado
       String palavra = result[0]; // Obtendo a palavra da lista retornada
       String frase = result[1]; // Obtendo a frase da lista retornada
       int resultado = result[2]; // Obtendo o resultado da lista retornada
-      _textChallenge = 'Challenge 18';
       _result =
-          'Palavra: $palavra\nFrase: $frase\nOcorrências: $resultado'; // Atualizando o valor de _result
+      'Palavra: $palavra\nFrase: $frase\nOcorrências: $resultado'; // Atualizando o valor de _result
     });
   }
 
@@ -317,42 +311,98 @@ class _MyHomePageState extends State<MyHomePage> {
     List<List<String>> result = groups.values.toList();
 
     setState(() {
-      _textChallenge = 'Challenge 19';
       _result = result.toString();
     });
   }
-
-  Color darkGreenColor = const Color(0xFF006400);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: darkGreenColor,
-        title: Text(widget.title),
+        backgroundColor: const Color(0xFF006400),
+        title: Text(widget.title,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                color: Colors.white
+            )),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              _textChallenge,
+            const Padding(
+              padding: EdgeInsets.all(12.0),
             ),
-            Text(
-              _result,
-              style: const TextStyle(
-                fontSize: 34,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 30, 255, 0),
+            DropdownButton<String>(
+              hint: const Text(
+                'Select a challenge',
               ),
-            )
+              value: _textChallenge,
+              items: _challengesList,
+              onChanged: (String? value) {
+                setState(() {
+                  _textChallenge = value;
+                });
+              },
+            ),
+            ButtonCalculate(
+              callChallenge: () {
+                callChallenge();
+              },
+            ),
+            const SizedBox(height: 20),
+            if (_result.isNotEmpty)
+              const Text(
+                'Result:',
+              ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                _result,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _challenge13,
-        tooltip: 'Increment',
-        child: const Icon(Icons.screen_share_outlined),
+    );
+  }
+}
+
+class ButtonCalculate extends StatelessWidget {
+  final Function() callChallenge;
+  const ButtonCalculate({
+    super.key,
+    required this.callChallenge,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Container(
+        width: double.maxFinite,
+        height: 50,
+        margin: const EdgeInsets.all(15),
+        child: ElevatedButton(
+          onPressed: callChallenge,
+          child: const Text(
+            'Calculate',
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF006400)
+            ),
+          ),
+        ),
       ),
     );
   }
